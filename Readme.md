@@ -7,7 +7,7 @@ A basic Docker Compose file to launch a container for WordPress and a second for
 ## NOTES:
 
 - **YOU SHOULD CHANGE THE PASSWORDS** in the file (but make sure WORDPRESS_DB_PASSWORD and MYSQL_PASSWORD
-are the same.
+are the same).
 - You _may_ need to change the port number 8080 if you have some other service running on that port.
 - A "wp-content" directory will be created in your current directory which will hold themes, 
 plugins and other content you add to your WordPress installation.
