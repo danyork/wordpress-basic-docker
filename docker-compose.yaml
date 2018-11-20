@@ -1,0 +1,42 @@
+
+# A basic Docker Compose file to launch a container for WordPress and a second for MySQL.
+#
+# Launch this with 'docker-compose up'
+# Then connect to http://localhost:8080/ to go through the WordPress installation process.
+#
+# NOTE: YOU SHOULD CHANGE THE PASSWORDS below (but make sure WORDPRESS_DB_PASSWORD and MYSQL_PASSWORD
+# are the same.
+#
+# A "wp-content" directory will be created in your current directory which will hold themes, 
+# plugins and other content you add to your WordPress installation.
+#
+# Credit to @wglambert on Github: https://github.com/docker-library/wordpress/issues/346#issuecomment-435975469
+
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    restart: always
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wpdb
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: password
+    ports:
+      - 8080:80
+      - 443:443
+
+  db:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    command: "--default-authentication-plugin=mysql_native_password"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
